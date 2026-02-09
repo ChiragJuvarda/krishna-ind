@@ -282,36 +282,20 @@
       }
 
       .loader-spinner {
-        position: relative;
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
+        animation: spin 1.5s linear infinite;
       }
 
-      .loader-spinner::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: conic-gradient(#121212 0deg, #121212 90deg, #e0e0e0 90deg, #e0e0e0 360deg);
-        animation: spin 1.2s linear infinite;
-      }
-
-      .loader-spinner::after {
-        content: '';
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 60px;
-        height: 60px;
-        background-color: #ffffff;
-        border-radius: 50%;
+      .spinner-circle {
+        stroke-dasharray: 75.4;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: dash 1.5s ease-in-out infinite;
       }
 
       .loader-text {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 600;
         color: #121212;
         margin: 0;
@@ -325,6 +309,21 @@
         }
         to { 
           transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 75.4;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 75.4;
+          stroke-dashoffset: 75.4;
+        }
+        100% {
+          stroke-dasharray: 75.4;
+          stroke-dashoffset: 150.8;
         }
       }
 
@@ -381,7 +380,10 @@
     {%- comment -%} Loading Screen {%- endcomment -%}
     <div id="page-loader" class="page-loader">
       <div class="loader-content">
-        <div class="loader-spinner"></div>
+        <svg class="loader-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#f0f0f0" stroke-width="3"/>
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#121212" stroke-width="3" stroke-dasharray="75.4" stroke-dashoffset="0" class="spinner-circle"/>
+        </svg>
         <p class="loader-text">Loading...</p>
       </div>
     </div>
