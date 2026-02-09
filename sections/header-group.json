@@ -61,13 +61,13 @@
         "ai_gen_block_6edce6d_9r66qp": {
           "type": "ai_gen_block_6edce6d",
           "settings": {
-            "columns_desktop": 4,
+            "columns_desktop": 2,
             "columns_mobile": "2",
             "aspect_ratio": "1/1",
             "gap": 16,
             "desktop_width_percent": 100,
             "section_padding": 40,
-            "animation_style": "zoom",
+            "animation_style": "tilt",
             "image_radius": 10,
             "image_1": "shopify://shop_images/highway-with-1-person-and-sunrise-background-image.png",
             "image_2": "shopify://shop_images/sun-rise-background-image.png",
