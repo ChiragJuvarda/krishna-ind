@@ -22,6 +22,7 @@
         "slide_AXcAfe": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/highway-with-1-person-and-sunrise-background-image.png",
             "image_overlay_opacity": 0,
             "heading": "Image slide",
             "heading_size": "h1",
