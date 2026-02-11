@@ -12,17 +12,15 @@
     "17705281448af3c586": {
       "type": "_blocks",
       "settings": {}
+    },
+    "product_cards_JNtqtj": {
+      "type": "product-cards",
+      "name": "Product Cards",
+      "settings": {}
     }
   },
-  "product_cards_section": {
-    "type": "product-cards",
-    "blocks": {},
-    "block_order": [],
-    "settings": {}
-  }
-},
   "order": [
     "17705281448af3c586",
-    "product_cards_section"
+    "product_cards_JNtqtj"
   ]
 }
