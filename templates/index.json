@@ -14,7 +14,15 @@
       "settings": {}
     }
   },
+  "product_cards_section": {
+    "type": "product-cards",
+    "blocks": {},
+    "block_order": [],
+    "settings": {}
+  }
+},
   "order": [
-    "17705281448af3c586"
+    "17705281448af3c586",
+    "product_cards_section"
   ]
 }
