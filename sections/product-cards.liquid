@@ -3,86 +3,43 @@
 <section id="product-cards" class="product-cards-section">
   <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
   <link rel="stylesheet" href="{{ 'product-cards.css' | asset_url }}" />
-  <!-- debug: show current section settings (remove in production) -->
+  <!-- debug: show current section settings (removed settings; using fallback collection) -->
   <div class="product-cards-debug" style="position:relative;font-size:12px;color:#666;padding:8px 0;text-align:center;">
-    <strong>Debug:</strong>
-    Collection={{ section.settings.collection | default: 'none' }} &nbsp;|&nbsp;
-    Blocks={{ section.blocks.size }} &nbsp;|&nbsp;
-    Autoplay={{ section.settings.autoplay }}
+    <strong>Debug:</strong> Settings removed — using fallback collection 'frontpage'
   </div>
   <div id="product-cards-container"></div>
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js" defer></script>
     <script src="{{ 'product-cards.js' | asset_url }}" defer></script>
 
-  {% comment %} Render products from blocks (manual) or selected collection {% endcomment %}
-  {% assign use_blocks = section.blocks.size > 0 %}
-  {% if use_blocks or section.settings.collection != blank %}
-    {% if use_blocks %}
-      {% assign products_source = 'blocks' %}
-    {% else %}
-      {% assign products_source = 'collection' %}
-      {% assign coll = collections[section.settings.collection] %}
-    {% endif %}
-
-    <div class="swiper-container"
-         style="--card-bg: {{ section.settings.card_bg | default: '#ffffff' }}; --card-border-color: {{ section.settings.card_border_color | default: '#e6e6e6' }}; --card-border-width: {{ section.settings.card_border_width | default: 0 }}px;"
-         data-autoplay="{{ section.settings.autoplay }}"
-         data-autoplay-interval="{{ section.settings.autoplay_interval }}"
-         data-show-dots="{{ section.settings.show_dots }}"
-         data-hover-effect="{{ section.settings.hover_effect }}">
-
+  {% comment %} Settings removed: use fallback collection 'frontpage' and defaults {% endcomment %}
+  {% assign coll = collections['frontpage'] %}
+  {% if coll and coll.products_count > 0 %}
+    <div class="swiper-container" style="--card-bg: #ffffff; --card-border-color: #e6e6e6; --card-border-width: 0px;" data-autoplay="false" data-show-dots="true">
       <div class="swiper-wrapper">
-        {% if products_source == 'blocks' %}
-          {% for block in section.blocks %}
-            {% assign p = all_products[block.settings.product] %}
-            {% if p %}
-              <div class="swiper-slide hover-effect-{{ section.settings.hover_effect }}">
-                <div class="picture">
-                  <a href="{{ p.url }}">
-                    {% if p.featured_image %}
-                      <img src="{{ p.featured_image | img_url: '600x600' }}" alt="{{ p.title }}">
-                    {% else %}
-                      <img src="{{ 'yog-laxmi-logo.png' | asset_url }}" alt="{{ p.title }}">
-                    {% endif %}
-                  </a>
-                </div>
-                <div class="detail">
-                  <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
-                  <span>{{ p.price | money }}</span>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        {% else %}
-          {% if coll and coll.products_count > 0 %}
-            {% for product in coll.products | slice: 0, section.settings.products_count %}
-              <div class="swiper-slide hover-effect-{{ section.settings.hover_effect }}">
-                <div class="picture">
-                  <a href="{{ product.url }}">
-                    {% if product.featured_image %}
-                      <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}">
-                    {% else %}
-                      <img src="{{ 'yog-laxmi-logo.png' | asset_url }}" alt="{{ product.title }}">
-                    {% endif %}
-                  </a>
-                </div>
-                <div class="detail">
-                  <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-                  <span>{{ product.price | money }}</span>
-                </div>
-              </div>
-            {% endfor %}
-          {% else %}
-            <p>No products found in the selected collection.</p>
-          {% endif %}
-        {% endif %}
+        {% for product in coll.products | slice: 0, 6 %}
+          <div class="swiper-slide hover-effect-lift">
+            <div class="picture">
+              <a href="{{ product.url }}">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}">
+                {% else %}
+                  <img src="{{ 'yog-laxmi-logo.png' | asset_url }}" alt="{{ product.title }}">
+                {% endif %}
+              </a>
+            </div>
+            <div class="detail">
+              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <span>{{ product.price | money }}</span>
+            </div>
+          </div>
+        {% endfor %}
       </div>
 
       <div class="swiper-pagination"></div>
       <div class="swiper-scrollbar"></div>
     </div>
   {% else %}
-    <p>Please select a collection or add product blocks in the section settings to display products.</p>
+    <p>No products found in the fallback collection 'frontpage'.</p>
   {% endif %}
 
 </section>
@@ -90,87 +47,8 @@
 {% schema %}
 {
   "name": "Product Cards",
-  "settings": [
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "number",
-      "id": "products_count",
-      "label": "Number of products",
-      "default": 6,
-      "min": 1,
-      "max": 20
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Autoplay",
-      "default": false
-    },
-    {
-      "type": "number",
-      "id": "autoplay_interval",
-      "label": "Autoplay interval (ms)",
-      "default": 3000,
-      "min": 1000,
-      "max": 10000
-    },
-    {
-      "type": "checkbox",
-      "id": "show_dots",
-      "label": "Show dots (pagination)",
-      "default": true
-    },
-    {
-      "type": "color",
-      "id": "card_bg",
-      "label": "Card background color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "card_border_color",
-      "label": "Card border color",
-      "default": "#e6e6e6"
-    },
-    {
-      "type": "number",
-      "id": "card_border_width",
-      "label": "Card border width (px)",
-      "default": 0,
-      "min": 0,
-      "max": 10
-    },
-    {
-      "type": "select",
-      "id": "hover_effect",
-      "label": "Hover effect",
-      "options": [
-        { "value": "none", "label": "None" },
-        { "value": "lift", "label": "Lift" },
-        { "value": "zoom", "label": "Zoom image" },
-        { "value": "shadow", "label": "Shadow" }
-      ],
-      "default": "lift"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "product",
-      "name": "Product",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 20,
+  "settings": [],
+  "blocks": [],
   "presets": [
     { "name": "Product Cards" }
   ]
