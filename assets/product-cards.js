@@ -14,7 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // avoid double-init
     if (container.__productCardsSwiper) return;
 
-    var swiper = new Swiper(container, {
+    // read data attributes (strings) and convert
+    var autoplayAttr = container.getAttribute('data-autoplay');
+    var autoplay = autoplayAttr === 'true' || autoplayAttr === '1';
+    var autoplayInterval = parseInt(container.getAttribute('data-autoplay-interval')) || 3000;
+    var showDotsAttr = container.getAttribute('data-show-dots');
+    var showDots = showDotsAttr === 'true' || showDotsAttr === '1';
+
+    var paginationConfig = showDots ? { el: container.querySelector('.swiper-pagination'), clickable: true } : false;
+
+    var swiperOptions = {
       effect: 'coverflow',
       grabCursor: true,
       centeredSlides: true,
@@ -26,13 +35,21 @@ document.addEventListener('DOMContentLoaded', function () {
         modifier: 1,
         slideShadows: true
       },
-      pagination: {
-        el: container.querySelector('.swiper-pagination'),
-        clickable: true
-      }
-    });
+      pagination: paginationConfig
+    };
 
-    container.__productCardsSwiper = swiper;
+    if (autoplay) {
+      swiperOptions.autoplay = { delay: autoplayInterval, disableOnInteraction: false };
+    }
+
+    try {
+      var swiper = new Swiper(container, swiperOptions);
+      container.__productCardsSwiper = swiper;
+      // expose for debugging in dev
+      container.__productCardsSwiperOptions = swiperOptions;
+    } catch (e) {
+      console.warn('Swiper init failed for product cards:', e);
+    }
   });
 });
 
