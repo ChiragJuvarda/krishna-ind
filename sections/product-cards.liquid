@@ -3,6 +3,13 @@
 <section id="product-cards" class="product-cards-section">
   <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
   <link rel="stylesheet" href="{{ 'product-cards.css' | asset_url }}" />
+  <!-- debug: show current section settings (remove in production) -->
+  <div class="product-cards-debug" style="position:relative;font-size:12px;color:#666;padding:8px 0;text-align:center;">
+    <strong>Debug:</strong>
+    Collection={{ section.settings.collection | default: 'none' }} &nbsp;|&nbsp;
+    Blocks={{ section.blocks.size }} &nbsp;|&nbsp;
+    Autoplay={{ section.settings.autoplay }}
+  </div>
   <div id="product-cards-container"></div>
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js" defer></script>
     <script src="{{ 'product-cards.js' | asset_url }}" defer></script>
