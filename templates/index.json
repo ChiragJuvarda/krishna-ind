@@ -14,7 +14,15 @@
       "settings": {}
     }
   },
+  "simple_heading_section": {
+    "type": "simple-heading",
+    "blocks": {},
+    "block_order": [],
+    "settings": {}
+  }
+},
   "order": [
-    "17705281448af3c586"
+    "17705281448af3c586",
+    "simple_heading_section"
   ]
 }

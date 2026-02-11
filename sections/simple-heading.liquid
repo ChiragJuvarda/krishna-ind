@@ -1,0 +1,63 @@
+<section id="simple-heading" class="simple-heading-section">
+  <div class="simple-heading-inner" style="text-align: {{ section.settings.alignment }};">
+    <{{ section.settings.tag }} class="simple-heading-text" style="color: {{ section.settings.color }}; font-size: {{ section.settings.size }}px;">
+      {{ section.settings.heading_text }}
+    </{{ section.settings.tag }}>
+  </div>
+
+  {% schema %}
+  {
+    "name": "Simple Heading",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading text",
+        "default": "Welcome to our store"
+      },
+      {
+        "type": "select",
+        "id": "tag",
+        "label": "HTML tag",
+        "options": [
+          { "value": "h1", "label": "H1" },
+          { "value": "h2", "label": "H2" },
+          { "value": "h3", "label": "H3" }
+        ],
+        "default": "h2"
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Alignment",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Center" },
+          { "value": "right", "label": "Right" }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "color",
+        "id": "color",
+        "label": "Text color",
+        "default": "#111111"
+      },
+      {
+        "type": "range",
+        "id": "size",
+        "label": "Font size (px)",
+        "min": 16,
+        "max": 64,
+        "step": 1,
+        "default": 32
+      }
+    ],
+    "presets": [
+      {
+        "name": "Simple Heading",
+        "category": "Text"
+      }
+    ]
+  }
+  {% endschema %}
