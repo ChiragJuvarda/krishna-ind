@@ -1,8 +1,10 @@
 {% comment %} Product Cards section - placeholder for user-provided HTML/CSS/JS {% endcomment %}
 
 <section id="product-cards" class="product-cards-section">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
   <link rel="stylesheet" href="{{ 'product-cards.css' | asset_url }}" />
   <div id="product-cards-container"></div>
+  <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js" defer></script>
   <script src="{{ 'product-cards.js' | asset_url }}" defer></script>
 <!-- Slider main container -->
 <div class="swiper-container">
