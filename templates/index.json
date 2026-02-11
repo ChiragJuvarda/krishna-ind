@@ -11,76 +11,10 @@
   "sections": {
     "17705281448af3c586": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_c2a3851_PqVAbA": {
-          "type": "ai_gen_block_c2a3851",
-          "settings": {
-            "slider_height": 500,
-            "desktop_width_percent": 100,
-            "border_radius": 0,
-            "overlay_color": "#000000",
-            "overlay_opacity": 40,
-            "text_color": "#ffffff",
-            "quote_size": 28,
-            "author_size": 16,
-            "autoplay": true,
-            "autoplay_speed": 5,
-            "quote_1": "The best way to predict the future is to create it.",
-            "author_1": "Peter Drucker",
-            "background_image_1": "shopify://shop_images/night-sky-background-image.png",
-            "quote_2": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-            "author_2": "Winston Churchill",
-            "background_image_2": "shopify://shop_images/sun-rise-background-image.png",
-            "quote_3": "The only way to do great work is to love what you do.",
-            "author_3": "Steve Jobs",
-            "background_image_3": "shopify://shop_images/highway-with-1-person-and-sunrise-background-image.png"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_c2a3851_PqVAbA"
-      ],
-      "settings": {}
-    },
-    "blocks_wzhRAQ": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_76c83b8_qXzMBG": {
-          "type": "ai_gen_block_76c83b8",
-          "settings": {
-            "slider_height": 600,
-            "transition_speed": 0.5,
-            "enable_autoplay": true,
-            "autoplay_speed": 5,
-            "pause_on_hover": true,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0.3,
-            "enable_hover_overlay": true,
-            "hover_overlay_opacity": 0.5,
-            "hover_overlay_duration": 0.3,
-            "enable_hover_zoom": true,
-            "hover_zoom_scale": 1.1,
-            "hover_zoom_duration": 0.5,
-            "show_arrows": true,
-            "arrow_bg_color": "#ffffff",
-            "arrow_color": "#000000",
-            "arrow_opacity": 0.7,
-            "show_dots": true,
-            "dot_color": "#ffffff"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_76c83b8_qXzMBG"
-      ],
-      "name": "Banner slider",
       "settings": {}
     }
   },
   "order": [
-    "17705281448af3c586",
-    "blocks_wzhRAQ"
+    "17705281448af3c586"
   ]
 }
