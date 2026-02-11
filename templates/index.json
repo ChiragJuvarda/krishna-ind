@@ -12,21 +12,9 @@
     "17705281448af3c586": {
       "type": "_blocks",
       "settings": {}
-    },
-    "simple_heading_YGhpra": {
-      "type": "simple-heading",
-      "name": "Simple Heading",
-      "settings": {
-        "heading_text": "Welcome to our store",
-        "tag": "h2",
-        "alignment": "center",
-        "color": "#111111",
-        "size": 32
-      }
     }
   },
   "order": [
-    "17705281448af3c586",
-    "simple_heading_YGhpra"
+    "17705281448af3c586"
   ]
 }
