@@ -14,15 +14,7 @@
       "settings": {}
     }
   },
-  "banner_slider_section": {
-    "type": "banner-slider",
-    "blocks": {},
-    "block_order": [],
-    "settings": {}
-  }
-},
   "order": [
-    "17705281448af3c586",
-    "banner_slider_section"
+    "17705281448af3c586"
   ]
 }
