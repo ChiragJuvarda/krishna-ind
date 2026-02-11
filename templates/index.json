@@ -12,15 +12,9 @@
     "17705281448af3c586": {
       "type": "_blocks",
       "settings": {}
-    },
-    "product_cards_xegEq4": {
-      "type": "product-cards",
-      "name": "Product Cards",
-      "settings": {}
     }
   },
   "order": [
-    "17705281448af3c586",
-    "product_cards_xegEq4"
+    "17705281448af3c586"
   ]
 }
