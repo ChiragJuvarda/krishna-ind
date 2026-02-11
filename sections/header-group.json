@@ -54,15 +54,10 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
-    },
-    "17706439440b220117": {
-      "type": "_blocks",
-      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header",
-    "17706439440b220117"
+    "header"
   ]
 }
