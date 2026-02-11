@@ -162,11 +162,106 @@
 {% schema %}
 {
   "name": "Banner Slider",
-  "settings": [],
-  "blocks": [],
-  "max_blocks": 0,
+  "settings": [
+    {
+      "type": "text",
+      "id": "slider_title",
+      "label": "Slider Title",
+      "default": "Explore Destinations"
+    },
+    {
+      "type": "richtext",
+      "id": "slider_subtitle",
+      "label": "Slider Subtitle"
+    },
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "label": "Auto-slide Duration (seconds)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Auto-play",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color"
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Discover Location"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "place_name",
+          "label": "Place Name",
+          "default": "Destination"
+        },
+        {
+          "type": "text",
+          "id": "title_line_1",
+          "label": "Title - Line 1",
+          "default": "TITLE"
+        },
+        {
+          "type": "text",
+          "id": "title_line_2",
+          "label": "Title - Line 2",
+          "default": "LINE"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide_image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
   "presets": [
-    { "name": "Banner Slider" }
+    {
+      "name": "Banner Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "place_name": "Switzerland Alps",
+            "title_line_1": "SAINT",
+            "title_line_2": "ANTONIEN",
+            "description": "Tucked away in the Switzerland Alps, Saint Antönien offers an idyllic retreat for those seeking tranquility and adventure alike."
+          }
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
