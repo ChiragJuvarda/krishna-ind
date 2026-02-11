@@ -462,6 +462,9 @@
           if (loader) {
             loader.style.display = 'flex';
             loader.classList.remove('hidden');
+            // In the theme editor sections fire load events without a full page load.
+            // Auto-hide the loader after a short delay to avoid it staying visible.
+            setTimeout(hideLoader, 600);
           }
         });
       })();
