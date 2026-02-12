@@ -19,7 +19,6 @@
 }
 
 .product-cards-section .swiper-container {
-  overflow: visible;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -31,7 +30,6 @@
   background-color: #fff;
   overflow: hidden;
   border-radius: 8px;
-}
 }
 
 /* allow customization via CSS variables (set inline on container) */
