@@ -1,5 +1,7 @@
 /* theme-toggle.css - simple dark theme variables and header button styles */
 
+/* allow applying theme-black to root or individual elements (header/footer) */
+.theme-black,
 :root.theme-black {
   /* RGB triplets (comma separated) matching theme conventions */
   --color-background: 0,0,0;

@@ -5,8 +5,11 @@
   function applyTheme(value) {
     if (value === 'black') {
       document.documentElement.classList.add(CLASS);
+      // also apply to header/footer wrappers so per-section color classes get overridden
+      document.querySelectorAll('.header-wrapper, .footer-wrapper, footer, .site-footer').forEach(el => el.classList.add(CLASS));
     } else {
       document.documentElement.classList.remove(CLASS);
+      document.querySelectorAll('.header-wrapper, .footer-wrapper, footer, .site-footer').forEach(el => el.classList.remove(CLASS));
     }
   }
 
