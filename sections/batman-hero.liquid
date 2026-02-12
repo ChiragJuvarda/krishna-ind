@@ -1,0 +1,152 @@
+{% comment %}
+  Batman Hero Section
+  Displays Batman information with animations
+{% endcomment %}
+
+{%- style -%}
+  .batman-hero-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .batman-hero-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="batman-hero batman-hero-{{ section.id }}">
+  <div class="batman-hero__background">
+    <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnFreGRmeGR5NHk5YWN2YXFxNmthcHV5ZjJ5bGpnZWR4ZGdveWVuZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xTiTnxpQ3ghPiB2Hp6/giphy.gif" alt="Gotham City Background" class="batman-hero__bg-gif" width="1920" height="1080" loading="eager">
+  </div>
+
+  <div class="batman-hero__overlay"></div>
+
+  <div class="batman-hero__content page-width">
+    <div class="batman-hero__grid">
+      <div class="batman-hero__text" data-batman-fade-in>
+        <h1 class="batman-hero__title">
+          {{ section.settings.title | default: "THE DARK KNIGHT" }}
+        </h1>
+        <div class="batman-hero__tagline">
+          {{ section.settings.tagline | default: "I am vengeance. I am the night. I am Batman!" }}
+        </div>
+        <div class="batman-hero__description rte">
+          {{ section.settings.description | default: "Batman is a superhero appearing in American comic books published by DC Comics. The character was created by artist Bob Kane and writer Bill Finger, and debuted in Detective Comics #27 in 1939." }}
+        </div>
+        
+        <div class="batman-hero__stats">
+          <div class="batman-stat" data-batman-slide-up>
+            <div class="batman-stat__icon">🦇</div>
+            <div class="batman-stat__value">1939</div>
+            <div class="batman-stat__label">First Appearance</div>
+          </div>
+          <div class="batman-stat" data-batman-slide-up data-delay="100">
+            <div class="batman-stat__icon">⚡</div>
+            <div class="batman-stat__value">Gotham</div>
+            <div class="batman-stat__label">City Protected</div>
+          </div>
+          <div class="batman-stat" data-batman-slide-up data-delay="200">
+            <div class="batman-stat__icon">🎭</div>
+            <div class="batman-stat__value">Bruce Wayne</div>
+            <div class="batman-stat__label">Secret Identity</div>
+          </div>
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="batman-hero__button">
+            <a href="{{ section.settings.button_link }}" class="batman-btn">
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="batman-hero__image" data-batman-fade-in data-delay="300">
+        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGRnOXZsMTJ6bW5wcDZ6N2Fha2N2aWxvaHBxcHdkY2licjVhanFiZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KGSMeJ91RW6v6/giphy.gif" alt="Batman" class="batman-hero__gif" width="500" height="500" loading="lazy">
+        <div class="batman-hero__glow"></div>
+      </div>
+    </div>
+
+    <div class="batman-hero__quotes" data-batman-fade-in data-delay="400">
+      <div class="batman-quote active">
+        <div class="batman-quote__text">"It's not who I am underneath, but what I do that defines me."</div>
+        <div class="batman-quote__author">— Batman</div>
+      </div>
+      <div class="batman-quote">
+        <div class="batman-quote__text">"Why do we fall? So we can learn to pick ourselves up."</div>
+        <div class="batman-quote__author">— Thomas Wayne</div>
+      </div>
+      <div class="batman-quote">
+        <div class="batman-quote__text">"A hero can be anyone, even a man doing something as simple and reassuring as putting a coat around a young boy's shoulders."</div>
+        <div class="batman-quote__author">— Batman</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Batman Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "THE DARK KNIGHT"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "I am vengeance. I am the night. I am Batman!"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Batman is a superhero appearing in American comic books published by DC Comics. The character was created by artist Bob Kane and writer Bill Finger, and debuted in Detective Comics #27 in 1939.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Explore Gotham"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Batman Hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,546 @@
+/* ========================================
+   BATMAN THEME - PURE DARK THEME
+   Clean, error-free CSS
+   ======================================== */
+
+/* ========================================
+   LOADING SCREEN
+   ======================================== */
+.batman-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.batman-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.batman-loader__content {
+  text-align: center;
+  animation: batmanPulse 2s ease-in-out infinite;
+}
+
+.batman-logo-container {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.batman-loader__gif {
+  width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 0, 0.6));
+  animation: batmanGlow 2s ease-in-out infinite;
+}
+
+.batman-loader__text {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #ffd700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  animation: batmanFlicker 3s ease-in-out infinite;
+}
+
+.batman-loader__progress {
+  width: 300px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.batman-loader__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+  width: 0%;
+  animation: batmanLoading 2.5s ease-out forwards;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+/* ========================================
+   BATMAN PAGE STYLES
+   ======================================== */
+.batman-page {
+  background: #000000;
+  min-height: 100vh;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.batman-page.visible {
+  opacity: 1;
+}
+
+.batman-content {
+  padding: 4rem 0;
+}
+
+.batman-page__content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  background: rgba(26, 26, 26, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================
+   BATMAN HERO SECTION
+   ======================================== */
+.batman-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #000000;
+}
+
+.batman-hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.batman-hero__bg-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+.batman-hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 26, 0.85) 50%, rgba(0, 0, 0, 0.9) 100%);
+  z-index: 2;
+}
+
+.batman-hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.batman-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+@media screen and (min-width: 990px) {
+  .batman-hero__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ========================================
+   HERO TEXT SECTION
+   ======================================== */
+.batman-hero__text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.batman-hero__text.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.batman-hero__title {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #ffd700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+               0 0 60px rgba(255, 215, 0, 0.4);
+  line-height: 1.1;
+  animation: batmanTitleGlow 3s ease-in-out infinite;
+}
+
+@media screen and (max-width: 989px) {
+  .batman-hero__title {
+    font-size: 3rem;
+    letter-spacing: 3px;
+  }
+}
+
+.batman-hero__tagline {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #cccccc;
+  margin-bottom: 2rem;
+  font-style: italic;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.batman-hero__description {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: #b8b8b8;
+  margin-bottom: 3rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================
+   STATS SECTION
+   ======================================== */
+.batman-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.batman-stat {
+  background: rgba(26, 26, 26, 0.8);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.batman-stat.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.batman-stat:hover {
+  transform: translateY(-8px);
+  border-color: #ffd700;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+  background: rgba(26, 26, 26, 0.95);
+}
+
+.batman-stat__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+.batman-stat__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.batman-stat__label {
+  font-size: 1.2rem;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   BUTTON
+   ======================================== */
+.batman-hero__button {
+  margin-top: 2rem;
+}
+
+.batman-btn {
+  display: inline-block;
+  padding: 1.6rem 4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #000000;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.batman-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.batman-btn:hover::before {
+  left: 100%;
+}
+
+.batman-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+}
+
+.batman-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   HERO IMAGE SECTION
+   ======================================== */
+.batman-hero__image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.batman-hero__image.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.batman-hero__gif {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 50px rgba(255, 215, 0, 0.4);
+  position: relative;
+  z-index: 2;
+}
+
+.batman-hero__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: batmanGlowPulse 3s ease-in-out infinite;
+}
+
+/* ========================================
+   QUOTES SECTION
+   ======================================== */
+.batman-hero__quotes {
+  margin-top: 4rem;
+  position: relative;
+  min-height: 120px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.batman-hero__quotes.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.batman-quote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(26, 26, 26, 0.6);
+  border-left: 4px solid #ffd700;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+
+.batman-quote.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+  pointer-events: auto;
+}
+
+.batman-quote__text {
+  font-size: 2rem;
+  font-style: italic;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
+}
+
+.batman-quote__author {
+  font-size: 1.4rem;
+  color: #ffd700;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes batmanPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes batmanGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 0, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 50px rgba(255, 255, 0, 0.9));
+  }
+}
+
+@keyframes batmanFlicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes batmanLoading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes batmanTitleGlow {
+  0%, 100% {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+                 0 0 60px rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.8),
+                 0 0 80px rgba(255, 215, 0, 0.6);
+  }
+}
+
+@keyframes batmanGlowPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+@media screen and (max-width: 749px) {
+  .batman-loader__gif {
+    width: 150px;
+  }
+
+  .batman-loader__text {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+
+  .batman-loader__progress {
+    width: 200px;
+  }
+
+  .batman-hero__tagline {
+    font-size: 1.4rem;
+  }
+
+  .batman-hero__description {
+    font-size: 1.4rem;
+  }
+
+  .batman-quote__text {
+    font-size: 1.6rem;
+  }
+
+  .batman-hero__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.batman-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.batman-fade-in.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dark theme overrides for better visibility */
+.batman-page * {
+  scrollbar-width: thin;
+  scrollbar-color: #ffd700 #1a1a1a;
+}
+
+.batman-page *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.batman-page *::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.batman-page *::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 4px;
+}
+
+.batman-page *::-webkit-scrollbar-thumb:hover {
+  background: #ffed4e;
+}

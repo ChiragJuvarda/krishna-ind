@@ -1,0 +1,31 @@
+{% comment %}
+  Batman Theme Page Template
+  Clean, error-free Liquid template
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'batman-theme.css' | asset_url }}" media="all">
+<script src="{{ 'batman-animations.js' | asset_url }}" defer="defer"></script>
+
+<div id="batman-loading-screen" class="batman-loader">
+  <div class="batman-loader__content">
+    <div class="batman-logo-container">
+      <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGF3cjJ5dGJ5YzRkN3NxY2d3ZHVwYWF3YnJzZW5sMHBkdzR3YnRoYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlvU6dwNpYjLaJW/giphy.gif" alt="Batman Logo Loading" class="batman-loader__gif" width="200" height="200" loading="eager">
+    </div>
+    <div class="batman-loader__text">Loading Gotham...</div>
+    <div class="batman-loader__progress">
+      <div class="batman-loader__progress-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div id="batman-page-content" class="batman-page">
+  {% section 'batman-hero' %}
+  
+  <div class="page-width batman-content">
+    {%- if page.content != blank -%}
+      <div class="batman-page__content rte">
+        {{ page.content }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
