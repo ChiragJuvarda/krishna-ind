@@ -32,21 +32,6 @@ slider-component.slider-component-full-width {
   padding-bottom: 0;
 }
 
-/* Fix: prevent custom card slides from overflowing / being clipped on the left
-   - Ensure slides can shrink and use box-sizing so widths behave predictably
-   - Constrain grid items inside sliders that contain cards to avoid excessive widths
-*/
-.slider__slide {
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-.slider.contains-card .grid__item,
-.slider.contains-card .slider__slide {
-  flex: 0 0 auto;
-  width: auto;
-  max-width: 34rem; /* reasonable cap for card width; adjust if you prefer */
-}
 
 @media screen and (max-width: 749px) {
   .slider.slider--mobile {
