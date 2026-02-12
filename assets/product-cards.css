@@ -10,17 +10,12 @@
   width: 100%;
   padding-top: 24px;
   padding-bottom: 24px;
-  /* Prevent slides from causing full-page horizontal overflow */
-  overflow-x: hidden;
-  overflow-y: visible;
 }
 
 /* Ensure wrapper is flex so slides lay out horizontally when Swiper CSS is not yet applied */
 .product-cards-section .swiper-wrapper {
   display: flex;
   align-items: center;
-  /* allow flex children to shrink and avoid overflowing their container */
-  min-width: 0;
 }
 
 .product-cards-section .swiper-container {
@@ -36,10 +31,7 @@
   background-color: #fff;
   overflow: hidden;
   border-radius: 8px;
-  /* ensure slides don't grow the page width and are sized predictably */
-  flex: 0 0 auto;
-  min-width: 0;
-  box-sizing: border-box;
+}
 }
 
 /* allow customization via CSS variables (set inline on container) */
@@ -49,8 +41,7 @@
 }
 
 .product-cards-section .picture {
-  width: 100%;
-  max-width: 320px;
+  width: 320px;
   height: 320px;
   overflow: hidden;
 }
