@@ -1,4 +1,4 @@
-/* theme-toggle.css - simple dark theme variables and header button styles */
+/* theme-toggle.css - dark theme variables and switch button styles (using user's design) */
 
 /* allow applying theme-black to root or individual elements (header/footer) */
 .theme-black,
@@ -15,26 +15,68 @@
   --color-shadow: 0,0,0;
 }
 
-/* Make theme toggle button visually consistent with header icons */
+/* small local vars for the switch visuals (do not override global theme vars) */
+:root {
+  --tt-light: #fff;
+  --tt-dark: #27282f;
+  --tt-primary: rgb(230,81,168);
+}
+
+/* Switch button container (uses user's layout) */
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--tt-primary);
+  width: 5rem;
+  height: 2.6rem;
+  border-radius: 30px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+#theme-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+  background: var(--tt-dark);
+  font-size: 1.3rem;
+  border-radius: 50%;
+  color: var(--tt-light);
+  box-shadow: 0 0 1.2rem var(--tt-dark);
+  position: absolute;
+  left: 0.3rem;
+  transition: transform 500ms, left 500ms;
+}
+
+/* When dark theme applied to body, move toggle to right and rotate */
+.dark-theme .theme-btn #theme-toggle {
+  transform: rotate(360deg);
+  left: calc(100% - 2.3rem);
+}
+
+/* accessibility and focus */
 .header__icon--theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: none;
+  padding: 0;
   background: transparent;
-  cursor: pointer;
-  color: rgba(var(--color-foreground), 0.8);
+  border: none;
 }
 
-.header__icon--theme-toggle .icon {
-  width: 1rem;
-  height: 1rem;
-  display: block;
-}
-
-.header__icon--theme-toggle:focus {
+.theme-toggle-button:focus {
   outline: 2px solid rgba(var(--color-foreground), 0.12);
   outline-offset: 2px;
+}
+
+/* optional small animation helper if JS adds it */
+.animate-toggle {
+  transition: transform 500ms, left 500ms;
 }
