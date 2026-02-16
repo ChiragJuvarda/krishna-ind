@@ -12,9 +12,17 @@
     "17705281448af3c586": {
       "type": "_blocks",
       "settings": {}
+    },
+    "modern_product_grid_j8dN3Q": {
+      "type": "modern-product-grid",
+      "name": "Modern Product Grid",
+      "settings": {
+        "collection": "new-products"
+      }
     }
   },
   "order": [
-    "17705281448af3c586"
+    "17705281448af3c586",
+    "modern_product_grid_j8dN3Q"
   ]
 }
