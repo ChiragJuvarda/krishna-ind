@@ -1,1 +1,89 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "why_choose_us_RPkwaL": {
+      "type": "why-choose-us",
+      "blocks": {
+        "feature_L3Raaa": {
+          "type": "feature",
+          "settings": {
+            "icon": "<svg width=\"60\" height=\"60\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3\"></path></svg>",
+            "title": "Good Quality",
+            "text": "Quality is more than a good product. We take product quality seriously and commit to the best quality of the products."
+          }
+        },
+        "feature_Ptqg9H": {
+          "type": "feature",
+          "settings": {
+            "icon": "<svg width=\"60\" height=\"60\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z\"></path><path d=\"M19 10v2a7 7 0 0 1-14 0v-2\"></path><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"23\"></line><line x1=\"8\" y1=\"23\" x2=\"16\" y2=\"23\"></line></svg>",
+            "title": "Customer Support Service",
+            "text": "Flora Appliances prides itself on delivering exemplary customer support services."
+          }
+        },
+        "feature_qejL7i": {
+          "type": "feature",
+          "settings": {
+            "icon": "<svg width=\"60\" height=\"60\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"></rect><polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"></polygon><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"></circle><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"></circle></svg>",
+            "title": "Best Shipping Service",
+            "text": "We provide the best shipping services without any delay. We ship your products on time."
+          }
+        }
+      },
+      "block_order": [
+        "feature_L3Raaa",
+        "feature_Ptqg9H",
+        "feature_qejL7i"
+      ],
+      "name": "Why Choose Us",
+      "settings": {
+        "heading": "Why Choose Us",
+        "highlight_text": "Choose Us",
+        "description": "The products follow highest industrial standards. We give quality assurance to our products. We have pan-India locations to service and maintain equipments.",
+        "text_alignment": "center",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "heading_color": "#000000",
+        "highlight_color": "#dc2626",
+        "text_color": "#333333",
+        "icon_color": "#dc2626",
+        "box_title_color": "#000000",
+        "box_text_color": "#666666",
+        "box_border_color": "#e5e5e5",
+        "box_background": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "why_choose_us_RPkwaL",
+    "footer"
+  ]
+}

@@ -19,10 +19,105 @@
       "settings": {
         "collection": "new-products"
       }
+    },
+    "grinding_capacity_gjGaTd": {
+      "type": "grinding-capacity",
+      "blocks": {
+        "capacity_item_NPETtg": {
+          "type": "capacity_item",
+          "settings": {
+            "title": "Wheat",
+            "capacity": "6.5 to 8.5 kg/hr",
+            "description": "",
+            "show_badge": false,
+            "badge_text": "Popular"
+          }
+        },
+        "capacity_item_6twxEE": {
+          "type": "capacity_item",
+          "settings": {
+            "title": "Besan",
+            "capacity": "18 kg/hr",
+            "description": "",
+            "show_badge": false,
+            "badge_text": "Popular"
+          }
+        },
+        "capacity_item_QiqBqp": {
+          "type": "capacity_item",
+          "settings": {
+            "title": "Rice",
+            "capacity": "5 to 7 kg/hr",
+            "description": "",
+            "show_badge": false,
+            "badge_text": "Popular"
+          }
+        },
+        "capacity_item_CaRYg4": {
+          "type": "capacity_item",
+          "settings": {
+            "title": "Bajari",
+            "capacity": "4 to 6 kg/hr",
+            "description": "",
+            "show_badge": false,
+            "badge_text": "Popular"
+          }
+        },
+        "capacity_item_fH4bF4": {
+          "type": "capacity_item",
+          "settings": {
+            "title": "Maize",
+            "capacity": "4 to 6 kg/hr",
+            "description": "",
+            "show_badge": false,
+            "badge_text": "Popular"
+          }
+        },
+        "capacity_item_Bhe63K": {
+          "type": "capacity_item",
+          "settings": {
+            "title": "Jowar",
+            "capacity": "4 to 6 kg/hr",
+            "description": "",
+            "show_badge": false,
+            "badge_text": "Popular"
+          }
+        }
+      },
+      "block_order": [
+        "capacity_item_NPETtg",
+        "capacity_item_6twxEE",
+        "capacity_item_QiqBqp",
+        "capacity_item_CaRYg4",
+        "capacity_item_fH4bF4",
+        "capacity_item_Bhe63K"
+      ],
+      "name": "Grinding Capacity",
+      "settings": {
+        "heading": "Grinding Capacity",
+        "highlight_text": "Capacity",
+        "subheading": "High-performance grinding for various products",
+        "text_alignment": "center",
+        "columns_desktop": 6,
+        "columns_mobile": "2",
+        "card_style": "modern",
+        "background_color": "#ffffff",
+        "heading_color": "#000000",
+        "highlight_color": "#dc2626",
+        "card_background": "#ffffff",
+        "card_border_color": "#e5e5e5",
+        "title_color": "#dc2626",
+        "value_color": "#000000",
+        "badge_background": "#22c55e",
+        "badge_text_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
     "17705281448af3c586",
-    "modern_product_grid_LftCbE"
+    "modern_product_grid_LftCbE",
+    "grinding_capacity_gjGaTd"
   ]
 }
