@@ -5,31 +5,20 @@
 
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'custom-product-cards.css' | asset_url | stylesheet_tag }}
-
 <script src="{{ 'custom-product-cards.js' | asset_url }}" defer="defer"></script>
-
-{%- unless section.settings.quick_add == 'none' -%}
-  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-{%- endunless -%}
-
-{%- if section.settings.quick_add == 'standard' -%}
-  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
 
 <link rel="preconnect" href="https://cdn.shopify.com">
 
 {%- style -%}
   .modern-product-grid-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-    background-color: {{ section.settings.background_color }};
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
   @media screen and (min-width: 750px) {
     .modern-product-grid-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
   }
 
@@ -54,64 +43,47 @@
   }
 {%- endstyle -%}
 
-<div class="modern-product-grid modern-product-grid-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+<div class="modern-product-grid modern-product-grid-{{ section.id }} gradient">
   <div class="page-width">
-    {%- if section.settings.title != blank or section.settings.description != blank -%}
-      <div class="modern-product-grid__header text-{{ section.settings.header_alignment }}">
-        {%- if section.settings.title != blank -%}
-          <h2 class="modern-product-grid__heading {{ section.settings.heading_size }}">
-            {{ section.settings.title | escape }}
-          </h2>
-        {%- endif -%}
-        {%- if section.settings.description != blank -%}
-          <div class="modern-product-grid__description rte">
-            {{ section.settings.description }}
-          </div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+    <div class="modern-product-grid__header">
+      <h2 class="modern-product-grid__heading h2">
+        Featured Products
+      </h2>
+    </div>
 
     {%- liquid
       assign collection = collections[section.settings.collection]
-      assign products_to_display = section.settings.products_to_show | default: 8
-      
-      assign columns_mobile_int = section.settings.columns_mobile | plus: 0
-      assign columns_desktop_int = section.settings.columns_desktop | plus: 0
-      
-      assign show_mobile_slider = false
-      if section.settings.enable_mobile_slider and products_to_display > columns_mobile_int
-        assign show_mobile_slider = true
-      endif
-      
-      assign show_desktop_slider = false
-      if section.settings.enable_desktop_slider and products_to_display > columns_desktop_int
-        assign show_desktop_slider = true
-      endif
+      assign products_to_display = 8
+      assign columns_mobile_int = 2
+      assign columns_desktop_int = 4
+      assign show_mobile_slider = true
+      assign show_desktop_slider = true
     -%}
 
     {%- if collection != blank and collection.products_count > 0 -%}
       <slider-component class="slider-mobile-gutter{% if show_mobile_slider == false %} page-width{% endif %}{% if show_desktop_slider == false %} page-width-desktop{% endif %}{% if show_desktop_slider %} slider-component-desktop{% endif %}">
         <div class="modern-product-grid__container 
-                    style-{{ section.settings.card_style }} 
-                    hover-{{ section.settings.hover_effect }}
-                    layout-{{ section.settings.layout_style }}"
-             data-columns-desktop="{{ section.settings.columns_desktop }}"
-             data-columns-mobile="{{ section.settings.columns_mobile }}">
+                    style-modern 
+                    hover-lift
+                    layout-grid"
+             data-columns-desktop="4"
+             data-columns-mobile="2">
           
           <ul id="Slider-{{ section.id }}"
               data-id="{{ section.id }}"
-              class="modern-product-grid__grid grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}"
-              role="list">
+              class="modern-product-grid__grid grid grid--2-col-tablet-down grid--4-col-desktop{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}"
+              role="list"
+              data-columns="4">
             {%- for product in collection.products limit: products_to_display -%}
               <li class="grid__item modern-card-item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}">
-                <div class="custom-product-card card-style--{{ section.settings.card_style }} hover--{{ section.settings.hover_effect }}"
+                <div class="custom-product-card card-style--modern hover--lift"
                      data-product-id="{{ product.id }}">
                   
                   {%- comment -%} Product Image Section {%- endcomment -%}
                   <div class="custom-product-card__image-container">
                     <a href="{{ product.url }}" class="custom-product-card__image-link" aria-label="{{ product.title | escape }}">
                       {%- if product.featured_media -%}
-                        <div class="custom-product-card__image-wrapper ratio--{{ section.settings.image_ratio }}">
+                        <div class="custom-product-card__image-wrapper ratio--square">
                           <img
                             srcset="
                               {%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
@@ -126,7 +98,7 @@
                             width="{{ product.featured_media.width }}"
                             height="{{ product.featured_media.height }}">
                           
-                          {%- if section.settings.show_secondary_image and product.media[1] != null -%}
+                          {%- if product.media[1] != null -%}
                             <img
                               srcset="
                                 {%- if product.media[1].width >= 165 -%}{{ product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
@@ -142,7 +114,7 @@
                           {%- endif -%}
                         </div>
                       {%- else -%}
-                        <div class="custom-product-card__image-wrapper ratio--{{ section.settings.image_ratio }}">
+                        <div class="custom-product-card__image-wrapper ratio--square">
                           <div class="custom-product-card__placeholder">
                             {{ 'product-1' | placeholder_svg_tag: 'custom-product-card__placeholder-svg' }}
                           </div>
@@ -151,8 +123,7 @@
                     </a>
 
                     {%- comment -%} Badges {%- endcomment -%}
-                    {%- if section.settings.show_badges -%}
-                      <div class="custom-product-card__badges position--{{ section.settings.badge_position }}">
+                    <div class="custom-product-card__badges position--top-left">
                         {%- if product.available == false -%}
                           <span class="custom-badge custom-badge--sold-out">
                             <svg class="custom-badge__icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -162,35 +133,27 @@
                           </span>
                         {%- elsif product.compare_at_price > product.price and product.available -%}
                           <span class="custom-badge custom-badge--sale">
-                            {%- if section.settings.show_sale_percentage -%}
-                              {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-                              <svg class="custom-badge__icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5L6 1z" fill="currentColor"/>
-                              </svg>
-                              -{{ discount }}%
-                            {%- else -%}
-                              Sale
-                            {%- endif -%}
+                            {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                            <svg class="custom-badge__icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                              <path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5l3.5-.5L6 1z" fill="currentColor"/>
+                            </svg>
+                            -{{ discount }}%
                           </span>
                         {%- endif -%}
                         
-                        {%- if section.settings.show_new_badge -%}
-                          {%- assign days_since_published = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400 -%}
-                          {%- if days_since_published < section.settings.new_badge_days -%}
-                            <span class="custom-badge custom-badge--new">
-                              <svg class="custom-badge__icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="2"/>
-                              </svg>
-                              {{ section.settings.new_badge_text | default: 'New' }}
-                            </span>
-                          {%- endif -%}
+                        {%- assign days_since_published = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400 -%}
+                        {%- if days_since_published < 30 -%}
+                          <span class="custom-badge custom-badge--new">
+                            <svg class="custom-badge__icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                              <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            New
+                          </span>
                         {%- endif -%}
-                      </div>
-                    {%- endif -%}
+                    </div>
 
                     {%- comment -%} Quick Actions {%- endcomment -%}
-                    {%- unless section.settings.quick_add == 'none' -%}
-                      <div class="custom-product-card__quick-actions">
+                    <div class="custom-product-card__quick-actions">
                         {%- if product.available -%}
                           <button type="button" 
                                   class="custom-quick-action custom-quick-action--cart"
@@ -212,27 +175,17 @@
                           </svg>
                         </button>
                       </div>
-                    {%- endunless -%}
                   </div>
 
                   {%- comment -%} Product Details Section {%- endcomment -%}
-                  <div class="custom-product-card__details text-align--{{ section.settings.text_alignment }}">
-                    
-                    {%- if section.settings.show_vendor and product.vendor -%}
-                      <div class="custom-product-card__vendor">{{ product.vendor }}</div>
-                    {%- endif -%}
+                  <div class="custom-product-card__details text-align--left">
+
 
                     <h3 class="custom-product-card__title">
                       <a href="{{ product.url }}" class="custom-product-card__title-link">
                         {{ product.title | escape }}
                       </a>
                     </h3>
-
-                    {%- if section.settings.show_description and product.description != blank -%}
-                      <p class="custom-product-card__description">
-                        {{ product.description | strip_html | truncatewords: section.settings.description_words }}
-                      </p>
-                    {%- endif -%}
 
                     <div class="custom-product-card__price-wrapper">
                       {%- if product.compare_at_price > product.price -%}
@@ -247,7 +200,7 @@
                       {%- endif -%}
                     </div>
 
-                    {%- if section.settings.show_rating and product.metafields.reviews.rating.value != blank -%}
+                    {%- if product.metafields.reviews.rating.value != blank -%}
                       <div class="custom-product-card__rating">
                         {%- assign rating_value = product.metafields.reviews.rating.value -%}
                         {%- assign rating_count = product.metafields.reviews.rating_count | default: 0 -%}
@@ -303,14 +256,6 @@
           </div>
         {%- endif -%}
       </slider-component>
-
-        {%- if section.settings.show_view_all and collection.products_count > products_to_display -%}
-          <div class="modern-product-grid__view-all center">
-            <a href="{{ collection.url }}" class="button button--{{ section.settings.button_style }}">
-              {{ section.settings.button_label | default: 'View all products' }}
-            </a>
-          </div>
-        {%- endif -%}
       </div>
     {%- else -%}
       <div class="modern-product-grid__empty">
@@ -327,336 +272,9 @@
   "class": "section",
   "settings": [
     {
-      "type": "header",
-      "content": "Section Header"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Featured Products"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "label": "Heading size",
-      "options": [
-        {"value": "h3", "label": "Small"},
-        {"value": "h2", "label": "Medium"},
-        {"value": "h1", "label": "Large"}
-      ],
-      "default": "h2"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description"
-    },
-    {
-      "type": "select",
-      "id": "header_alignment",
-      "label": "Header alignment",
-      "options": [
-        {"value": "left", "label": "Left"},
-        {"value": "center", "label": "Center"},
-        {"value": "right", "label": "Right"}
-      ],
-      "default": "center"
-    },
-    {
-      "type": "header",
-      "content": "Product Collection"
-    },
-    {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "label": "Products to show",
-      "min": 2,
-      "max": 24,
-      "step": 1,
-      "default": 8
-    },
-    {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_desktop_slider",
-      "label": "Enable slider on desktop",
-      "default": true,
-      "info": "Show products in a scrollable carousel on desktop"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_mobile_slider",
-      "label": "Enable slider on mobile",
-      "default": true,
-      "info": "Show products in a scrollable carousel on mobile"
-    },
-    {
-      "type": "select",
-      "id": "layout_style",
-      "label": "Layout style",
-      "options": [
-        {"value": "grid", "label": "Grid"},
-        {"value": "masonry", "label": "Masonry"},
-        {"value": "list", "label": "List"}
-      ],
-      "default": "grid",
-      "info": "Grid is recommended for consistent card heights"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "label": "Columns on desktop",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "default": 4
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "label": "Columns on mobile",
-      "options": [
-        {"value": "1", "label": "1 column"},
-        {"value": "2", "label": "2 columns"}
-      ],
-      "default": "2"
-    },
-    {
-      "type": "header",
-      "content": "Card Style"
-    },
-    {
-      "type": "select",
-      "id": "card_style",
-      "label": "Card style",
-      "options": [
-        {"value": "standard", "label": "Standard"},
-        {"value": "modern", "label": "Modern"},
-        {"value": "minimal", "label": "Minimal"},
-        {"value": "elevated", "label": "Elevated"},
-        {"value": "bordered", "label": "Bordered"}
-      ],
-      "default": "modern"
-    },
-    {
-      "type": "select",
-      "id": "hover_effect",
-      "label": "Hover effect",
-      "options": [
-        {"value": "none", "label": "None"},
-        {"value": "lift", "label": "Lift"},
-        {"value": "zoom", "label": "Zoom image"},
-        {"value": "shadow", "label": "Shadow"},
-        {"value": "overlay", "label": "Overlay"}
-      ],
-      "default": "lift"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "label": "Image ratio",
-      "options": [
-        {"value": "adapt", "label": "Adapt to image"},
-        {"value": "square", "label": "Square (1:1)"},
-        {"value": "portrait", "label": "Portrait (2:3)"},
-        {"value": "landscape", "label": "Landscape (3:2)"}
-      ],
-      "default": "square"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_secondary_image",
-      "label": "Show second image on hover",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Product Information"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "label": "Show vendor",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "label": "Show product rating",
-      "default": false,
-      "info": "Requires product reviews app"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_price",
-      "label": "Show price",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_description",
-      "label": "Show description",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "description_words",
-      "label": "Description word count",
-      "min": 5,
-      "max": 30,
-      "step": 5,
-      "default": 15
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text alignment",
-      "options": [
-        {"value": "left", "label": "Left"},
-        {"value": "center", "label": "Center"},
-        {"value": "right", "label": "Right"}
-      ],
-      "default": "left"
-    },
-    {
-      "type": "header",
-      "content": "Badges"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_badges",
-      "label": "Show badges",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "badge_position",
-      "label": "Badge position",
-      "options": [
-        {"value": "top-left", "label": "Top left"},
-        {"value": "top-right", "label": "Top right"},
-        {"value": "bottom-left", "label": "Bottom left"},
-        {"value": "bottom-right", "label": "Bottom right"}
-      ],
-      "default": "top-left"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_sale_percentage",
-      "label": "Show sale percentage",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_new_badge",
-      "label": "Show 'New' badge",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "new_badge_days",
-      "label": "'New' badge duration (days)",
-      "min": 7,
-      "max": 90,
-      "step": 1,
-      "default": 30
-    },
-    {
-      "type": "text",
-      "id": "new_badge_text",
-      "label": "'New' badge text",
-      "default": "New"
-    },
-    {
-      "type": "header",
-      "content": "Quick Actions"
-    },
-    {
-      "type": "select",
-      "id": "quick_add",
-      "label": "Enable quick add button",
-      "options": [
-        {"value": "none", "label": "None"},
-        {"value": "standard", "label": "Standard"},
-        {"value": "bulk", "label": "Bulk"}
-      ],
-      "default": "standard",
-      "info": "Quick add button appears on product cards"
-    },
-    {
-      "type": "header",
-      "content": "View All Button"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "Show 'View all' button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "View all products"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        {"value": "primary", "label": "Primary"},
-        {"value": "secondary", "label": "Secondary"},
-        {"value": "tertiary", "label": "Tertiary"}
-      ],
-      "default": "primary"
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "default": "scheme-1"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color"
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 36
+      "label": "Product Collection"
     }
   ],
   "presets": [
