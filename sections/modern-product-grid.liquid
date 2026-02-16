@@ -1,0 +1,586 @@
+{% comment %}
+  Modern Product Grid Section
+  Enhanced product cards with full theme editor controls
+{% endcomment %}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-card.css' | asset_url | stylesheet_tag }}
+{{ 'modern-product-cards.css' | asset_url | stylesheet_tag }}
+
+<link rel="preconnect" href="https://cdn.shopify.com">
+
+{%- style -%}
+  .modern-product-grid-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .modern-product-grid-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .modern-product-grid-{{ section.id }} .card-wrapper {
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  .modern-product-grid-{{ section.id }} .card-wrapper:nth-child(1) { animation-delay: 0.1s; }
+  .modern-product-grid-{{ section.id }} .card-wrapper:nth-child(2) { animation-delay: 0.2s; }
+  .modern-product-grid-{{ section.id }} .card-wrapper:nth-child(3) { animation-delay: 0.3s; }
+  .modern-product-grid-{{ section.id }} .card-wrapper:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+{%- endstyle -%}
+
+<div class="modern-product-grid modern-product-grid-{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="modern-product-grid__header text-{{ section.settings.header_alignment }}">
+        {%- if section.settings.title != blank -%}
+          <h2 class="modern-product-grid__heading {{ section.settings.heading_size }}">
+            {{ section.settings.title | escape }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="modern-product-grid__description rte">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign collection = collections[section.settings.collection]
+      assign products_to_display = section.settings.products_to_show | default: 8
+    -%}
+
+    {%- if collection != blank and collection.products_count > 0 -%}
+      <div class="modern-product-grid__container 
+                  style-{{ section.settings.card_style }} 
+                  hover-{{ section.settings.hover_effect }}
+                  layout-{{ section.settings.layout_style }}"
+           data-columns-desktop="{{ section.settings.columns_desktop }}"
+           data-columns-mobile="{{ section.settings.columns_mobile }}">
+        
+        <div class="modern-product-grid__grid grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop">
+          {%- for product in collection.products limit: products_to_display -%}
+            <div class="grid__item modern-card-item">
+              <div class="card-wrapper product-card-wrapper">
+                <div class="modern-product-card card--{{ section.settings.card_style }}" data-product-id="{{ product.id }}">
+                  
+                  {%- comment -%} Product Image {%- endcomment -%}
+                  <div class="modern-product-card__image-wrapper">
+                    <a href="{{ product.url }}" class="modern-product-card__link">
+                      {%- if product.featured_media -%}
+                        <div class="modern-product-card__media media ratio-{{ section.settings.image_ratio }}">
+                          <img
+                            srcset="
+                              {%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                              {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                              {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                              {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                              {%- if product.featured_media.width >= 940 -%}{{ product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                              {{ product.featured_media | image_url }} {{ product.featured_media.width }}w"
+                            src="{{ product.featured_media | image_url: width: 533 }}"
+                            sizes="(min-width: 1200px) calc((1200px - 100px) / {{ section.settings.columns_desktop }}), (min-width: 750px) calc((100vw - 120px) / {{ section.settings.columns_desktop }}), calc((100vw - 40px) / {{ section.settings.columns_mobile }})"
+                            alt="{{ product.featured_media.alt | escape }}"
+                            class="modern-product-card__image"
+                            loading="lazy"
+                            width="{{ product.featured_media.width }}"
+                            height="{{ product.featured_media.height }}">
+                          
+                          {%- if section.settings.show_secondary_image and product.media[1] != null -%}
+                            <img
+                              srcset="
+                                {%- if product.media[1].width >= 165 -%}{{ product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
+                                {%- if product.media[1].width >= 360 -%}{{ product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
+                                {%- if product.media[1].width >= 533 -%}{{ product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
+                                {%- if product.media[1].width >= 720 -%}{{ product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
+                                {{ product.media[1] | image_url }} {{ product.media[1].width }}w"
+                              src="{{ product.media[1] | image_url: width: 533 }}"
+                              sizes="(min-width: 1200px) calc((1200px - 100px) / {{ section.settings.columns_desktop }}), (min-width: 750px) calc((100vw - 120px) / {{ section.settings.columns_desktop }}), calc((100vw - 40px) / {{ section.settings.columns_mobile }})"
+                              alt="{{ product.media[1].alt | escape }}"
+                              class="modern-product-card__image modern-product-card__image--secondary"
+                              loading="lazy"
+                              width="{{ product.media[1].width }}"
+                              height="{{ product.media[1].height }}">
+                          {%- endif -%}
+                        </div>
+                      {%- else -%}
+                        <div class="modern-product-card__media media ratio-{{ section.settings.image_ratio }}">
+                          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                      {%- endif -%}
+                    </a>
+
+                    {%- comment -%} Badges {%- endcomment -%}
+                    {%- if section.settings.show_badges -%}
+                      <div class="modern-product-card__badges badge-position-{{ section.settings.badge_position }}">
+                        {%- if product.available == false -%}
+                          <span class="modern-badge modern-badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+                        {%- elsif product.compare_at_price > product.price and product.available -%}
+                          <span class="modern-badge modern-badge--sale">
+                            {%- if section.settings.show_sale_percentage -%}
+                              {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                              -{{ discount }}%
+                            {%- else -%}
+                              {{ 'products.product.on_sale' | t }}
+                            {%- endif -%}
+                          </span>
+                        {%- endif -%}
+                        
+                        {%- if section.settings.show_new_badge -%}
+                          {%- assign days_since_published = 'now' | date: '%s' | minus: product.published_at | date: '%s' | divided_by: 86400 -%}
+                          {%- if days_since_published < section.settings.new_badge_days -%}
+                            <span class="modern-badge modern-badge--new">{{ section.settings.new_badge_text | default: 'New' }}</span>
+                          {%- endif -%}
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- comment -%} Quick Actions {%- endcomment -%}
+                    {%- if section.settings.show_quick_add or section.settings.show_quick_view -%}
+                      <div class="modern-product-card__actions">
+                        {%- if section.settings.show_quick_view -%}
+                          <button type="button" class="modern-quick-btn modern-quick-btn--view" aria-label="Quick view {{ product.title }}">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M10 4C4.5 4 1 10 1 10s3.5 6 9 6 9-6 9-6-3.5-6-9-6z" stroke="currentColor" stroke-width="1.5"/>
+                              <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                          </button>
+                        {%- endif -%}
+                        {%- if section.settings.show_quick_add and product.available -%}
+                          <button type="button" class="modern-quick-btn modern-quick-btn--add" aria-label="Quick add {{ product.title }}">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                          </button>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                  {%- comment -%} Product Info {%- endcomment -%}
+                  <div class="modern-product-card__info text-{{ section.settings.text_alignment }}">
+                    {%- if section.settings.show_vendor -%}
+                      <div class="modern-product-card__vendor">
+                        {{ product.vendor }}
+                      </div>
+                    {%- endif -%}
+
+                    <h3 class="modern-product-card__title h5">
+                      <a href="{{ product.url }}" class="modern-product-card__title-link">
+                        {{ product.title | escape }}
+                      </a>
+                    </h3>
+
+                    {%- if section.settings.show_rating -%}
+                      <div class="modern-product-card__rating">
+                        {% render 'product-rating', product: product %}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if section.settings.show_description -%}
+                      <div class="modern-product-card__description">
+                        {{ product.description | strip_html | truncatewords: section.settings.description_words }}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if section.settings.show_price -%}
+                      <div class="modern-product-card__price">
+                        {% render 'price', product: product, price_class: 'modern-price' %}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if section.settings.show_color_swatches and product.has_only_default_variant == false -%}
+                      <div class="modern-product-card__swatches">
+                        {%- for option in product.options_with_values -%}
+                          {%- if option.name == 'Color' or option.name == 'Colour' -%}
+                            <div class="modern-color-swatches">
+                              {%- for value in option.values limit: 5 -%}
+                                <span class="modern-color-swatch" style="background-color: {{ value | handle }};" title="{{ value }}"></span>
+                              {%- endfor -%}
+                              {%- if option.values.size > 5 -%}
+                                <span class="modern-color-swatch-more">+{{ option.values.size | minus: 5 }}</span>
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.show_view_all and collection.products_count > products_to_display -%}
+          <div class="modern-product-grid__view-all center">
+            <a href="{{ collection.url }}" class="button button--{{ section.settings.button_style }}">
+              {{ section.settings.button_label | default: 'View all products' }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="modern-product-grid__empty">
+        <p>{{ 'sections.modern_product_grid.no_products' | t }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="{{ 'modern-product-cards.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Modern Product Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Products"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {"value": "h3", "label": "Small"},
+        {"value": "h2", "label": "Medium"},
+        {"value": "h1", "label": "Large"}
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Product Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout style",
+      "options": [
+        {"value": "grid", "label": "Grid"},
+        {"value": "masonry", "label": "Masonry"},
+        {"value": "list", "label": "List"}
+      ],
+      "default": "grid",
+      "info": "Grid is recommended for consistent card heights"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {"value": "1", "label": "1 column"},
+        {"value": "2", "label": "2 columns"}
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Card Style"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        {"value": "standard", "label": "Standard"},
+        {"value": "modern", "label": "Modern"},
+        {"value": "minimal", "label": "Minimal"},
+        {"value": "elevated", "label": "Elevated"},
+        {"value": "bordered", "label": "Bordered"}
+      ],
+      "default": "modern"
+    },
+    {
+      "type": "select",
+      "id": "hover_effect",
+      "label": "Hover effect",
+      "options": [
+        {"value": "none", "label": "None"},
+        {"value": "lift", "label": "Lift"},
+        {"value": "zoom", "label": "Zoom image"},
+        {"value": "shadow", "label": "Shadow"},
+        {"value": "overlay", "label": "Overlay"}
+      ],
+      "default": "lift"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        {"value": "adapt", "label": "Adapt to image"},
+        {"value": "square", "label": "Square (1:1)"},
+        {"value": "portrait", "label": "Portrait (2:3)"},
+        {"value": "landscape", "label": "Landscape (3:2)"}
+      ],
+      "default": "square"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show second image on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": false,
+      "info": "Requires product reviews app"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "description_words",
+      "label": "Description word count",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show badges",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "badge_position",
+      "label": "Badge position",
+      "options": [
+        {"value": "top-left", "label": "Top left"},
+        {"value": "top-right", "label": "Top right"},
+        {"value": "bottom-left", "label": "Bottom left"},
+        {"value": "bottom-right", "label": "Bottom right"}
+      ],
+      "default": "top-left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_percentage",
+      "label": "Show sale percentage",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_new_badge",
+      "label": "Show 'New' badge",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "new_badge_days",
+      "label": "'New' badge duration (days)",
+      "min": 7,
+      "max": 90,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "new_badge_text",
+      "label": "'New' badge text",
+      "default": "New"
+    },
+    {
+      "type": "header",
+      "content": "Quick Actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show quick add button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_view",
+      "label": "Show quick view button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_color_swatches",
+      "label": "Show color swatches",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "View All Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View all products"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {"value": "primary", "label": "Primary"},
+        {"value": "secondary", "label": "Secondary"},
+        {"value": "tertiary", "label": "Tertiary"}
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Modern Product Grid"
+    }
+  ]
+}
+{% endschema %}

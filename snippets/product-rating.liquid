@@ -1,0 +1,105 @@
+{% comment %}
+  Product Rating Snippet
+  Renders product rating stars
+
+  Accepts:
+  - product: {Object} Product object
+{% endcomment %}
+
+{%- if product.metafields.reviews.rating.value != blank -%}
+  {%- liquid
+    assign rating_decimal = 0
+    assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+    if decimal >= 0.3 and decimal <= 0.7
+      assign rating_decimal = 0.5
+    elsif decimal > 0.7
+      assign rating_decimal = 1
+    endif
+  -%}
+  
+  <div class="product-rating" 
+       data-rating="{{ product.metafields.reviews.rating.value.rating }}"
+       data-count="{{ product.metafields.reviews.rating_count }}">
+    <div class="rating-stars" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value.rating, rating_max: product.metafields.reviews.rating.value.scale_max }}">
+      <span class="rating-stars-inner" style="width: calc({{ product.metafields.reviews.rating.value.rating }} / {{ product.metafields.reviews.rating.value.scale_max }} * 100%);">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+      </span>
+      <span class="rating-stars-bg">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 1.5l1.847 3.739 4.123.6-2.985 2.91.705 4.11L8 11.1l-3.69 1.76.705-4.11L2.03 5.84l4.123-.6L8 1.5z"/>
+        </svg>
+      </span>
+    </div>
+    
+    {%- if product.metafields.reviews.rating_count > 0 -%}
+      <p class="rating-count">
+        <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+        <span class="visually-hidden">{{ product.metafields.reviews.rating_count }} {{ "accessibility.total_reviews" | t }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+<style>
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .rating-stars {
+    position: relative;
+    display: inline-flex;
+    gap: 2px;
+  }
+  
+  .rating-stars-inner,
+  .rating-stars-bg {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .rating-stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #fbbf24;
+  }
+  
+  .rating-stars-bg {
+    color: #e5e7eb;
+  }
+  
+  .rating-count {
+    margin: 0;
+    font-size: 0.875rem;
+    color: rgba(var(--color-foreground), 0.6);
+  }
+</style>
