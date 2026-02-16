@@ -620,10 +620,13 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   grid-template-columns: none;
+  scroll-padding-left: 1.5rem;
 }
 
 .modern-product-grid__grid.slider::-webkit-scrollbar {
@@ -633,12 +636,18 @@
 .modern-product-grid .slider .modern-card-item {
   flex-shrink: 0;
   scroll-snap-align: start;
+  margin-right: 1.5rem;
+}
+
+.modern-product-grid .slider .modern-card-item:last-child {
+  margin-right: 0;
 }
 
 /* Desktop - 4 columns */
 @media screen and (min-width: 990px) {
   .modern-product-grid .slider.slider--desktop .modern-card-item {
     width: calc(25% - 1.125rem);
+    min-width: 280px;
   }
 }
 
@@ -646,13 +655,16 @@
 @media screen and (min-width: 750px) and (max-width: 989px) {
   .modern-product-grid .slider .modern-card-item {
     width: calc(33.333% - 1rem);
+    min-width: 250px;
   }
 }
 
 /* Mobile - 2 columns */
 @media screen and (max-width: 749px) {
   .modern-product-grid .slider.slider--mobile .modern-card-item {
-    width: calc(50% - 0.5rem);
+    width: calc(50% - 0.75rem);
+    min-width: 160px;
+    margin-right: 1rem;
   }
 }
 

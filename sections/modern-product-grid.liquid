@@ -75,7 +75,8 @@
               role="list"
               data-columns="4">
             {%- for product in collection.products limit: products_to_display -%}
-              <li class="grid__item modern-card-item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}">
+              <li id="Slide-{{ section.id }}-{{ forloop.index }}" 
+                  class="grid__item modern-card-item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}">
                 <div class="custom-product-card card-style--modern hover--lift"
                      data-product-id="{{ product.id }}">
                   
