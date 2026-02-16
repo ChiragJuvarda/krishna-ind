@@ -1,0 +1,303 @@
+{% comment %}
+  Why Choose Us Section - Custom Unique Design
+  Features section with icon boxes
+{% endcomment %}
+
+{{ 'why-choose-us.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .why-choose-us-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .why-choose-us-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .why-choose-us-{{ section.id }} .why-choose-heading {
+    color: {{ section.settings.heading_color }};
+  }
+
+  .why-choose-us-{{ section.id }} .why-choose-heading .highlight {
+    color: {{ section.settings.highlight_color }};
+  }
+
+  .why-choose-us-{{ section.id }} .why-choose-description {
+    color: {{ section.settings.text_color }};
+  }
+
+  .why-choose-us-{{ section.id }} .feature-box {
+    border-color: {{ section.settings.box_border_color }};
+    background: {{ section.settings.box_background }};
+  }
+
+  .why-choose-us-{{ section.id }} .feature-box__icon {
+    color: {{ section.settings.icon_color }};
+  }
+
+  .why-choose-us-{{ section.id }} .feature-box__title {
+    color: {{ section.settings.box_title_color }};
+  }
+
+  .why-choose-us-{{ section.id }} .feature-box__text {
+    color: {{ section.settings.box_text_color }};
+  }
+{%- endstyle -%}
+
+<div class="why-choose-us why-choose-us-{{ section.id }}">
+  <div class="page-width">
+    
+    {%- comment -%} Section Header {%- endcomment -%}
+    <div class="why-choose-header text-{{ section.settings.text_alignment }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="why-choose-heading">
+          {%- assign heading_parts = section.settings.heading | split: section.settings.highlight_text -%}
+          {%- if heading_parts.size > 1 and section.settings.highlight_text != blank -%}
+            {{ heading_parts[0] }}<span class="highlight">{{ section.settings.highlight_text }}</span>{{ heading_parts[1] }}
+          {%- else -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="why-choose-description">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Feature Boxes {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="why-choose-features">
+        <div class="feature-grid columns-{{ section.settings.columns_desktop }} columns-mobile-{{ section.settings.columns_mobile }}">
+          {%- for block in section.blocks -%}
+            <div class="feature-box" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <div class="feature-box__icon-wrapper">
+                  <div class="feature-box__icon">
+                    {{ block.settings.icon }}
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.title != blank -%}
+                <h3 class="feature-box__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <p class="feature-box__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "highlight_text",
+      "label": "Text to highlight",
+      "default": "Choose Us",
+      "info": "This text will be highlighted in different color"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description text",
+      "default": "The products follow highest industrial standards. We give quality assurance to our products. We have pan-India locations to service and maintain equipments."
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {"value": "1", "label": "1 column"},
+        {"value": "2", "label": "2 columns"}
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight color",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#dc2626"
+    },
+    {
+      "type": "color",
+      "id": "box_title_color",
+      "label": "Box title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "box_text_color",
+      "label": "Box text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "box_border_color",
+      "label": "Box border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "box_background",
+      "label": "Box background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Box",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon SVG",
+          "default": "<svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3'></path></svg>",
+          "info": "Paste SVG code for the icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Good Quality"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Quality is more than a good product. We take product quality seriously and commit to the best quality."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Us",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "<svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3'></path></svg>",
+            "title": "Good Quality",
+            "text": "Quality is more than a good product. We take product quality seriously and commit to the best quality of the products."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "<svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z'></path><path d='M19 10v2a7 7 0 0 1-14 0v-2'></path><line x1='12' y1='19' x2='12' y2='23'></line><line x1='8' y1='23' x2='16' y2='23'></line></svg>",
+            "title": "Customer Support Service",
+            "text": "Flora Appliances prides itself on delivering exemplary customer support services."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "<svg width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='1' y='3' width='15' height='13'></rect><polygon points='16 8 20 8 23 11 23 16 16 16 16 8'></polygon><circle cx='5.5' cy='18.5' r='2.5'></circle><circle cx='18.5' cy='18.5' r='2.5'></circle></svg>",
+            "title": "Best Shipping Service",
+            "text": "We provide the best shipping services without any delay. We ship your products on time."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
