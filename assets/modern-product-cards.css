@@ -34,6 +34,129 @@
   margin-bottom: 3rem;
 }
 
+/* Modern Card Wrapper - Works with existing card-product */
+.modern-product-card-wrapper {
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-product-card-wrapper .card {
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Style Variants for existing cards */
+.style-standard .modern-product-card-wrapper .card {
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+}
+
+.style-modern .modern-product-card-wrapper .card {
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: none;
+}
+
+.style-minimal .modern-product-card-wrapper .card {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.style-elevated .modern-product-card-wrapper .card {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+.style-bordered .modern-product-card-wrapper .card {
+  border: 2px solid rgba(var(--color-foreground), 0.15);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+/* Hover Effects */
+.hover-lift .modern-product-card-wrapper:hover {
+  transform: translateY(-8px);
+}
+
+.hover-lift.style-modern .modern-product-card-wrapper:hover,
+.hover-lift.style-elevated .modern-product-card-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.hover-zoom .modern-product-card-wrapper:hover .card__media img {
+  transform: scale(1.08);
+}
+
+.hover-shadow .modern-product-card-wrapper:hover .card {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.hover-overlay .modern-product-card-wrapper .card__media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hover-overlay .modern-product-card-wrapper:hover .card__media::after {
+  opacity: 1;
+}
+
+/* Enhance existing card media */
+.modern-product-card-wrapper .card__media img {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-product-card-wrapper .card__information {
+  padding: 1.25rem 1rem;
+}
+
+/* Enhance badge positioning */
+.modern-product-card-wrapper .card__badge {
+  z-index: 2;
+}
+
+.modern-product-card-wrapper .badge {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Price enhancements */
+.modern-product-card-wrapper .price {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.modern-product-card-wrapper .price__sale {
+  color: #dc2626;
+}
+
+/* Vendor styling */
+.modern-product-card-wrapper .card__heading .caption-with-letter-spacing {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(var(--color-foreground), 0.6);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
 /* Grid Breakpoints */
 @media screen and (max-width: 749px) {
   .modern-product-grid__grid.grid--1-col-tablet-down {
