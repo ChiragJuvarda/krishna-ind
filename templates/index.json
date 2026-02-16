@@ -21,7 +21,7 @@
         "heading_size": "h2",
         "description": "",
         "header_alignment": "center",
-        "collection": "frontpage",
+        "collection": "new-products",
         "products_to_show": 8,
         "layout_style": "grid",
         "columns_desktop": 4,
