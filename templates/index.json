@@ -23,6 +23,8 @@
         "header_alignment": "center",
         "collection": "new-products",
         "products_to_show": 8,
+        "enable_desktop_slider": true,
+        "enable_mobile_slider": true,
         "layout_style": "grid",
         "columns_desktop": 4,
         "columns_mobile": "2",

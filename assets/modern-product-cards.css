@@ -558,6 +558,78 @@
   color: rgba(var(--color-foreground), 0.6);
 }
 
+/* Slider Enhancements for Modern Cards */
+.modern-product-grid__grid.slider {
+  overflow-x: auto;
+  scroll-padding-left: 1.5rem;
+}
+
+.modern-product-grid__grid.slider .slider__slide {
+  width: calc(100% / var(--columns-desktop, 4) - 2rem);
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .modern-product-grid__grid.slider .slider__slide {
+    width: calc(100% / var(--columns-mobile, 2) - 1rem);
+  }
+}
+
+/* Slider Navigation Buttons Enhancement */
+slider-component .slider-buttons {
+  margin-top: 2rem;
+}
+
+slider-component .slider-button {
+  background: rgb(var(--color-background));
+  border: 2px solid rgba(var(--color-foreground), 0.15);
+  color: rgb(var(--color-foreground));
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+slider-component .slider-button:hover:not([disabled]) {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+slider-component .slider-button[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+slider-component .slider-counter {
+  min-width: 60px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Modern slider arrows positioning */
+.slider-component-desktop .slider-buttons {
+  position: relative;
+  z-index: 2;
+}
+
+/* Peek effect for slider */
+.grid--peek {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* Smooth transitions */
+.modern-product-grid__grid.slider {
+  scroll-behavior: smooth;
+}
+
 /* Responsive Adjustments */
 @media screen and (max-width: 749px) {
   .modern-product-grid__header {
