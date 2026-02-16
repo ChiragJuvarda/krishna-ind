@@ -26,6 +26,7 @@
         "capacity_item_NPETtg": {
           "type": "capacity_item",
           "settings": {
+            "image": "shopify://shop_images/1536056392-wheat.jpg",
             "title": "Wheat",
             "capacity": "6.5 to 8.5 kg/hr",
             "description": "",
